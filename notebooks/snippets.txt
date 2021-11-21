@@ -1,0 +1,12 @@
+snippets:
+
+df_meta = pd.read_csv("s3://adfc-bike-census/adfc_data/fetched_eco_bike_data.csv")
+df_meta.rename(columns={'number': 'station_code'}, inplace=True)
+df_meta.set_index(['city', 'station_code'], inplace=True)
+display(df_meta)
+
+df = pd.read_csv("s3://adfc-bike-census/adfc_data/transformed/combined.csv")
+df.set_index(['city', 'station_code'], inplace=True)
+display(df)
+
+merged = df.join(df_meta)
